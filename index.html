@@ -5,9 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Weather</title>
   </head>
   <body>
+    <header>
+      <img src="image/menu.png" alt="">
+      <p>Регистрация</p>
+    </header>
+    <section style="background: url(image/sky.jpg) no-repeat center / cover">
+        <div class="head">
+          <div class="input-field col s12">
+            <select>
+              <option value="1" selected>Москва</option>
+              <option value="2">Париж</option>
+              <option value="3">Нью-Йорк</option>
+            </select>
+          </div>
+          <div class="dateBox">
+            <img src="image/left.png" alt="" class="pre">
+            <h1 class="date">04.25.2020</h1>
+            <img src="image/right.png" alt="" class="next">
+          </div>
+        </div>
+        <div class="today">
+          <p class="now">36°С</p>
+          <div class="mainParams">
+            <p class="params">Максимальная температура: <span>36°С</span></p>
+            <p class="params">Минимальная температура: <span>36°С</span></p>
+            <p class="params">Скорость ветра: <span>10 м/с</span></p>
+            <p class="params">Осадки: <span>много</span></p>
+          </div>
+    </section>
+    <!-- <div class="popup">
+
+    </div> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="app.js" type="module"></script>
     <script src="api.js" type="module"></script>
   </body>
