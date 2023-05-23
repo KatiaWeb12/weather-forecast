@@ -17,7 +17,7 @@
   <body>
     <header>
       <img src="image/menu.png" alt="">
-      <p>Регистрация</p>
+      <p class="reg">Регистрация</p>
     </header>
     <section style="background: url(image/sky.jpg) no-repeat center / cover">
         <div class="head">
@@ -29,23 +29,96 @@
             </select>
           </div>
           <div class="dateBox">
-            <img src="image/left.png" alt="" class="pre">
-            <h1 class="date">04.25.2020</h1>
+            <img src="image/left.png" alt="" class="prev">
+            <h1 class="date"></h1>
             <img src="image/right.png" alt="" class="next">
           </div>
         </div>
         <div class="today">
-          <p class="now">36°С</p>
-          <div class="mainParams">
-            <p class="params">Максимальная температура: <span>36°С</span></p>
-            <p class="params">Минимальная температура: <span>36°С</span></p>
-            <p class="params">Скорость ветра: <span>10 м/с</span></p>
-            <p class="params">Осадки: <span>много</span></p>
+          <img src="image/light.png" alt="" class="light">
+            <div class="infoCont">
+              <div class="slider">
+                <div class="el">
+                <p class="now">36°С</p>
+            <div class="mainParams">
+              <p class="params">Максимальная температура: <span>36°С</span></p>
+             <p class="params">Минимальная температура: <span>36°С</span></p>
+              <p class="params">Скорость ветра: <span>10 м/с</span></p>
+              <p class="params">Осадки: <span>много</span></p>
+            </div>  
           </div>
+          <div class="el">
+            <p class="now">35°С</p>
+            <div class="mainParams">
+              <p class="params">Максимальная температура: <span>36°С</span></p>
+             <p class="params">Минимальная температура: <span>36°С</span></p>
+              <p class="params">Скорость ветра: <span>10 м/с</span></p>
+              <p class="params">Осадки: <span>много</span></p>
+            </div>  
+          </div>
+          <div class="el">
+            <p class="now">34°С</p>
+            <div class="mainParams">
+              <p class="params">Максимальная температура: <span>36°С</span></p>
+             <p class="params">Минимальная температура: <span>36°С</span></p>
+              <p class="params">Скорость ветра: <span>10 м/с</span></p>
+              <p class="params">Осадки: <span>много</span></p>
+            </div>  
+          </div>
+          <div class="el">
+            <p class="now">33°С</p>
+            <div class="mainParams">
+              <p class="params">Максимальная температура: <span>36°С</span></p>
+              <p class="params">Минимальная температура: <span>36°С</span></p>
+              <p class="params">Скорость ветра: <span>10 м/с</span></p>
+              <p class="params">Осадки: <span>много</span></p>
+            </div>  
+          </div>
+          <div class="el">
+            <p class="now">33°С</p>
+            <div class="mainParams">
+              <p class="params">Максимальная температура: <span>36°С</span></p>
+              <p class="params">Минимальная температура: <span>36°С</span></p>
+              <p class="params">Скорость ветра: <span>10 м/с</span></p>
+              <p class="params">Осадки: <span>много</span></p>
+            </div>  
+          </div>
+          <div class="el">
+            <p class="now">33°С</p>
+            <div class="mainParams">
+              <p class="params">Максимальная температура: <span>36°С</span></p>
+              <p class="params">Минимальная температура: <span>36°С</span></p>
+              <p class="params">Скорость ветра: <span>10 м/с</span></p>
+              <p class="params">Осадки: <span>много</span></p>
+            </div>  
+          </div>
+          <div class="el">
+            <p class="now">5°С</p>
+            <div class="mainParams">
+              <p class="params">Максимальная температура: <span>36°С</span></p>
+              <p class="params">Минимальная температура: <span>36°С</span></p>
+              <p class="params">Скорость ветра: <span>10 м/с</span></p>
+              <p class="params">Осадки: <span>много</span></p>
+            </div>  
+          </div>
+              </div>
+            </div>
     </section>
-    <!-- <div class="popup">
-
-    </div> -->
+    <div class="hey popup">
+      <h2 class="hey regH2">Зарегистрируйтесь, чтобы получать уведомления!</h2>
+      <div class="hey cont">
+        <form class="hey" action="">
+          <h3 class="hey">Введите имя</h3>
+          <input class="hey enter" type="text" required>
+          <h3 class="hey">Введите номер телефона</h3>
+          <input class="hey enter" type="text" required>
+          <h3 class="hey">Введите свой возраст</h3>
+          <input class="hey enter" type="number" required>
+          <input class="hey submit"type="submit">
+        </form>
+      </div>
+    </div>
+    <button class="look">Смотреть погоду</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="app.js" type="module"></script>
     <script src="api.js" type="module"></script>
