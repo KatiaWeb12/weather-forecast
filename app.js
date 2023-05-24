@@ -7,8 +7,9 @@ let prev = document.querySelector(".prev");
 let next = document.querySelector(".next");
 let slider = document.querySelector(".slider");
 let myDate = document.querySelector(".date");
+let button = document.querySelector("button");
+let onlyEl = document.querySelector(".onlyEl");
 let left = 0;
-
 document.addEventListener("DOMContentLoaded", function () {
   let selects = document.querySelectorAll("select");
   let selectInit = M.FormSelect.init(selects);
@@ -39,9 +40,9 @@ let month = mainDate.getMonth();
 let year = mainDate.getFullYear();
 myDate.textContent = `${date}.0${month + 1}.${year}`;
 next.addEventListener("click", () => {
-  left -= 630;
+  left -= 650;
   date += 1;
-  if (left <= -4410) {
+  if (left <= -4550) {
     left = 0;
     date = mainDate.getDate();
   }
@@ -50,10 +51,10 @@ next.addEventListener("click", () => {
   myDate.textContent = `${date}.0${month + 1}.${year}`;
 });
 prev.addEventListener("click", () => {
-  left += 630;
+  left += 650;
   date -= 1;
   if (left > 0) {
-    left = -3780;
+    left = -3900;
     date = mainDate.getDate() + 3;
   }
   slider.style.left = left + "px";
@@ -75,9 +76,83 @@ function checkDate() {
   }
 }
 
-// function onGetResponse(){
-//   mainUrl =
-//   myHTTP.get(err, data){
-
-//     }
-//   }
+let myHttpRes = myHTTP();
+function service() {
+  let mainUrl = "https://api.open-meteo.com/v1/forecast";
+  return {
+    weatherGetting(latitude, longitude, cb) {
+      myHttpRes.get(
+        `${mainUrl}?latitude=${latitude}&longitude=${longitude}&hourly=is_day&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum,windspeed_10m_max&current_weather=true&timezone=Europe%2FMoscow`,
+        cb
+      );
+    },
+  };
+}
+function onGetResponse(err, data) {
+  if (err) {
+    alert(`error ${err} found`);
+    document.location.reload(); //перезагрузка страницы
+    return;
+  }
+  renderCards(data);
+}
+function renderFirstEl(temp, maxTemp, minTemp, wind, snow, rain) {
+  return `<div class="el so">
+              <p class="now">${temp}°С</p>
+              <div class="mainParams">
+                <p class="params">Максимальная температура: <span>${maxTemp}°С</span></p>
+                <p class="params">Минимальная температура: <span>${minTemp}°С</span></p>
+                <p class="params">Скорость ветра: <span>${wind} м/с</span></p>
+                <p class="params">Снег: <span>${snow} мм</span></p>
+                <p class="params">Дождь: <span>${rain} мм</span></p>
+              </div>  
+            </div>`;
+}
+function renderEl(maxTemp, minTemp, wind, snow, rain) {
+  return `<div class="el manyCont so">
+              <div class="mainParams">
+                <p class="params">Максимальная температура: <span>${maxTemp}°С</span></p>
+                <p class="params">Минимальная температура: <span>${minTemp}°С</span></p>
+                <p class="params">Скорость ветра: <span>${wind} м/с</span></p>
+                <p class="params">Снег: <span>${snow} мм</span></p>
+                <p class="params">Дождь: <span>${rain} мм</span></p>
+              </div>  
+          </div>`;
+}
+function renderCards(data) {
+  let info = data;
+  let fragment = "";
+  fragment += renderFirstEl(
+    info.current_weather.temperature,
+    info.daily.temperature_2m_max[0],
+    info.daily.temperature_2m_min[0],
+    info.daily.windspeed_10m_max[0],
+    info.daily.snowfall_sum[0],
+    info.daily.precipitation_sum[0]
+  );
+  for (let i = 1; i < 7; i++) {
+    fragment += renderEl(
+      info.daily.temperature_2m_max[i],
+      info.daily.temperature_2m_min[i],
+      info.daily.windspeed_10m_max[i],
+      info.daily.snowfall_sum[i],
+      info.daily.precipitation_sum[i]
+    );
+  }
+  slider.insertAdjacentHTML("afterbegin", fragment);
+}
+let select = document.querySelector("select");
+button.addEventListener("click", () => {
+  let selectValue = select.value;
+  let values = selectValue.split(" ");
+  let latitude = values[0];
+  let longitude = values[1];
+  console.log(selectValue);
+  if (onlyEl) {
+    onlyEl.remove();
+  }
+  document.querySelectorAll(".so").forEach((el) => {
+    el.remove();
+  });
+  service().weatherGetting(latitude, longitude, onGetResponse);
+});

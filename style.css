@@ -42,9 +42,11 @@ section{
     display: flex;
     margin-top: 2%;
 }
-
+.onlyEl{
+    width: 4550px !important;
+}
 .infoCont{
-    width: 630px;
+    width: 650px;
     height: 500px !important;
     overflow: hidden;
     position: relative;
@@ -59,13 +61,13 @@ section{
 	left: 0px;
     display: flex;
     flex-direction: row;
-    width: 4410px !important;
+    width: 4550px !important;
     height: auto !important;
 }
 .el{
     /* position: absolute;
     left: 50.2%; */
-    width: 630px !important;
+    width: 650px ;
     height: 500px !important;
     /* animation-name: weather;
     animation-duration: 6s;
@@ -73,8 +75,11 @@ section{
     background: linear-gradient(90deg, rgba(255,255,255,1) 19%, rgba(213,231,233,1) 100%);
     padding: 25px;
 }
-
-
+.manyCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .light{
     width: 600px;
@@ -114,6 +119,7 @@ section{
     font-size: 60px;
     margin-bottom: 30px;
     color: #286FB4;
+    height: 75px;
 }
 .params{
     color: #286FB4;
