@@ -9,7 +9,9 @@ let slider = document.querySelector(".slider");
 let myDate = document.querySelector(".date");
 let button = document.querySelector("button");
 let onlyEl = document.querySelector(".onlyEl");
+let body = document.querySelector("body");
 let left = 0;
+let inputCity = document.querySelector('input')
 document.addEventListener("DOMContentLoaded", function () {
   let selects = document.querySelectorAll("select");
   let selectInit = M.FormSelect.init(selects);
@@ -33,6 +35,10 @@ window.addEventListener("click", (event) => {
     regH2.style.display = "none";
   }
 });
+let request = fetch(
+  "http://api.openweathermap.org/geo/1.0/direct?q=Москва&limit=5&appid=01e784806838253089e9f2bfd4f94b14"
+).then((res) => res.json());
+console.log(request);
 
 let mainDate = new Date();
 let date = mainDate.getDate();
@@ -48,7 +54,11 @@ next.addEventListener("click", () => {
   }
   slider.style.left = left + "px";
   checkDate();
-  myDate.textContent = `${date}.0${month + 1}.${year}`;
+  if (date > 0 && date < 10) {
+    myDate.textContent = `0${date}.0${month + 1}.${year}`;
+  } else {
+    myDate.textContent = `${date}.0${month + 1}.${year}`;
+  }
 });
 prev.addEventListener("click", () => {
   left += 650;
@@ -59,7 +69,11 @@ prev.addEventListener("click", () => {
   }
   slider.style.left = left + "px";
   checkDate();
-  myDate.textContent = `${date}.0${month + 1}.${year}`;
+  if (date > 0 && date < 10) {
+    myDate.textContent = `0${date}.0${month + 1}.${year}`;
+  } else {
+    myDate.textContent = `${date}.0${month + 1}.${year}`;
+  }
 });
 function checkDate() {
   if (date > 31) {
@@ -141,13 +155,11 @@ function renderCards(data) {
   }
   slider.insertAdjacentHTML("afterbegin", fragment);
 }
-let select = document.querySelector("select");
 button.addEventListener("click", () => {
   let selectValue = select.value;
   let values = selectValue.split(" ");
   let latitude = values[0];
   let longitude = values[1];
-  console.log(selectValue);
   if (onlyEl) {
     onlyEl.remove();
   }
