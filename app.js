@@ -11,7 +11,6 @@ let button = document.querySelector("button");
 let onlyEl = document.querySelector(".onlyEl");
 let body = document.querySelector("body");
 let left = 0;
-let inputCity = document.querySelector('input')
 document.addEventListener("DOMContentLoaded", function () {
   let selects = document.querySelectorAll("select");
   let selectInit = M.FormSelect.init(selects);
@@ -35,11 +34,6 @@ window.addEventListener("click", (event) => {
     regH2.style.display = "none";
   }
 });
-let request = fetch(
-  "http://api.openweathermap.org/geo/1.0/direct?q=Москва&limit=5&appid=01e784806838253089e9f2bfd4f94b14"
-).then((res) => res.json());
-console.log(request);
-
 let mainDate = new Date();
 let date = mainDate.getDate();
 let month = mainDate.getMonth();
@@ -102,13 +96,31 @@ function service() {
     },
   };
 }
-function onGetResponse(err, data) {
+function findError(err) {
   if (err) {
     alert(`error ${err} found`);
     document.location.reload(); //перезагрузка страницы
     return;
   }
+}
+function onGetResponse(err, data) {
+  findError(err);
   renderCards(data);
+}
+function getCityInfo(err, data) {
+  findError(err);
+  useCoordinates(data);
+}
+function coordinatesCreating(city) {
+  return myHttpRes.get(
+    `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=01e784806838253089e9f2bfd4f94b14`,
+    getCityInfo
+  );
+}
+function useCoordinates(data) {
+  let lat = data[0].lat;
+  let lon = data[0].lon;
+  service().weatherGetting(lat, lon, onGetResponse);
 }
 function renderFirstEl(temp, maxTemp, minTemp, wind, snow, rain) {
   return `<div class="el so">
@@ -156,15 +168,16 @@ function renderCards(data) {
   slider.insertAdjacentHTML("afterbegin", fragment);
 }
 button.addEventListener("click", () => {
-  let selectValue = select.value;
-  let values = selectValue.split(" ");
-  let latitude = values[0];
-  let longitude = values[1];
   if (onlyEl) {
     onlyEl.remove();
   }
   document.querySelectorAll(".so").forEach((el) => {
     el.remove();
   });
-  service().weatherGetting(latitude, longitude, onGetResponse);
+  let city = document.getElementById("last_name").value;
+  if (!city) {
+    alert("введи город");
+    return;
+  }
+  coordinatesCreating(city);
 });
