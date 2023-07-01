@@ -38,38 +38,15 @@ let mainDate = new Date();
 let date = mainDate.getDate();
 let month = mainDate.getMonth();
 let year = mainDate.getFullYear();
-myDate.textContent = `${date}.0${month + 1}.${year}`;
-next.addEventListener("click", () => {
-  left -= 650;
-  date += 1;
-  if (left <= -4550) {
-    left = 0;
-    date = mainDate.getDate();
-  }
-  slider.style.left = left + "px";
-  checkDate();
+doNewDate(date);
+function doNewDate(date) {
   if (date > 0 && date < 10) {
     myDate.textContent = `0${date}.0${month + 1}.${year}`;
   } else {
     myDate.textContent = `${date}.0${month + 1}.${year}`;
   }
-});
-prev.addEventListener("click", () => {
-  left += 650;
-  date -= 1;
-  if (left > 0) {
-    left = -3900;
-    date = mainDate.getDate() + 3;
-  }
-  slider.style.left = left + "px";
-  checkDate();
-  if (date > 0 && date < 10) {
-    myDate.textContent = `0${date}.0${month + 1}.${year}`;
-  } else {
-    myDate.textContent = `${date}.0${month + 1}.${year}`;
-  }
-});
-function checkDate() {
+}
+function checkDate(date) {
   if (date > 31) {
     date = 1;
     return;
@@ -83,6 +60,29 @@ function checkDate() {
     date = 1;
   }
 }
+next.addEventListener("click", () => {
+  left -= 650;
+  date += 1;
+  if (left <= -4550) {
+    left = 0;
+    date = mainDate.getDate();
+  }
+  slider.style.left = left + "px";
+  checkDate(date);
+  doNewDate(date);
+});
+prev.addEventListener("click", () => {
+  left += 650;
+  date -= 1;
+  if (left > 0) {
+    left = -3900;
+    date = mainDate.getDate() + 6;
+  }
+
+  slider.style.left = left + "px";
+  checkDate(date);
+  doNewDate(date);
+});
 
 let myHttpRes = myHTTP();
 function service() {

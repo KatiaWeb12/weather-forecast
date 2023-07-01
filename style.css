@@ -163,7 +163,7 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label{
 input[type=text]:not(.browser-default){
     font-size: 23px !important;
 }
-input[type=text]:not(.browser-default){
+.cityInput{
     border-bottom: 1px solid white !important;
 }
 .dropdown-content{
