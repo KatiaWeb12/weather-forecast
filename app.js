@@ -61,25 +61,25 @@ function checkDate(date) {
   }
 }
 next.addEventListener("click", () => {
-  left -= 650;
+  left -= 38;
   date += 1;
-  if (left <= -4550) {
+  if (left <= -266) {
     left = 0;
     date = mainDate.getDate();
   }
-  slider.style.left = left + "px";
+  slider.style.left = left + "vw";
   checkDate(date);
   doNewDate(date);
 });
 prev.addEventListener("click", () => {
-  left += 650;
+  left += 38;
   date -= 1;
   if (left > 0) {
-    left = -3900;
+    left = -228;
     date = mainDate.getDate() + 6;
   }
 
-  slider.style.left = left + "px";
+  slider.style.left = left + "vw";
   checkDate(date);
   doNewDate(date);
 });
