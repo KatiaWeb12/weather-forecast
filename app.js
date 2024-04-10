@@ -179,5 +179,6 @@ button.addEventListener("click", () => {
     alert("введи город");
     return;
   }
-  coordinatesCreating(city);
+  coordinatesCreating(city); 
+  // привет
 });
